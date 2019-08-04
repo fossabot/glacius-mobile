@@ -13,8 +13,14 @@ Effect<LoginState> buildEffect() {
 }
 
 void _onLogin(Action action, Context<LoginState> ctx) async {
+  ProgressDialog progressDialog = new ProgressDialog(
+    ctx.context,
+    ProgressDialogType.Normal,
+  );
+  progressDialog.setMessage('Logging in...');
+
   try {
-    (action.payload as ProgressDialog).show();
+    progressDialog.show();
     String token = await UserService()
         .login(
             email: ctx.state.emailEditController.text,
@@ -23,11 +29,11 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
 
     ctx.dispatch(LoginActionCreator.onLoginSuccess());
     await AuthPlugin().storeToken(token: token);
-    (action.payload as ProgressDialog).hide();
+    progressDialog.hide();
     await Navigator.of(ctx.context).pushReplacementNamed('/home');
   } catch (err) {
     String errMsg = err is Map ? err['msg'] : err.toString();
     ctx.dispatch(LoginActionCreator.onLoginFailure(errMsg));
-    (action.payload as ProgressDialog).hide();
+    progressDialog.hide();
   }
 }

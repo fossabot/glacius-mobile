@@ -9,21 +9,28 @@ class LoginState implements Cloneable<LoginState> {
   TextEditingController emailEditController;
   TextEditingController passwordEditController;
   String errorMsg;
+  bool hidePasswordField;
 
   @override
   LoginState clone() {
     return LoginState()
-    ..loginResult = loginResult
+      ..loginResult = loginResult
       ..emailEditController = emailEditController
       ..passwordEditController = passwordEditController
-      ..errorMsg = errorMsg;
+      ..errorMsg = errorMsg
+      ..hidePasswordField = hidePasswordField;
   }
 }
 
 LoginState initState(Map<String, dynamic> args) {
   LoginState state = LoginState();
   state.loginResult = LoginResult.None;
-  state.emailEditController = new TextEditingController(text: DotEnv().env['DEFAULT_EMAIL']);
-  state.passwordEditController = new TextEditingController(text: DotEnv().env['DEFAULT_PASS']);
+  state.emailEditController = new TextEditingController(
+    text: DotEnv().env['DEFAULT_EMAIL'],
+  );
+  state.passwordEditController = new TextEditingController(
+    text: DotEnv().env['DEFAULT_PASS'],
+  );
+  state.hidePasswordField = true;
   return state;
 }

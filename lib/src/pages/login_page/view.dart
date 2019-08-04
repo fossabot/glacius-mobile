@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -10,12 +9,6 @@ Widget buildView(
   Dispatch dispatch,
   ViewService viewService,
 ) {
-  ProgressDialog progressDialog = new ProgressDialog(
-    viewService.context,
-    ProgressDialogType.Normal,
-  );
-  progressDialog.setMessage('Logging in...');
-
   return Scaffold(
     body: Container(
       decoration: BoxDecoration(
@@ -80,7 +73,6 @@ Widget buildView(
                 ),
               ),
             ),
-            padding: EdgeInsets.only(left: 0.0, right: 10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +81,6 @@ Widget buildView(
                   padding: EdgeInsets.only(
                     top: 10.0,
                     bottom: 10.0,
-                    right: 00.0,
                   ),
                   child: Icon(
                     Icons.email,
@@ -97,7 +88,7 @@ Widget buildView(
                   ),
                 ),
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
                     controller: state.emailEditController,
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.center,
@@ -130,7 +121,6 @@ Widget buildView(
                 ),
               ),
             ),
-            padding: EdgeInsets.only(left: 0.0, right: 10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +129,6 @@ Widget buildView(
                   padding: EdgeInsets.only(
                     top: 10.0,
                     bottom: 10.0,
-                    right: 00.0,
                   ),
                   child: Icon(
                     Icons.lock_outline,
@@ -149,20 +138,35 @@ Widget buildView(
                 Expanded(
                   child: TextFormField(
                     controller: state.passwordEditController,
-                    obscureText: true,
+                    obscureText: state.hidePasswordField,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
-                    decoration: InputDecoration(border: InputBorder.none),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 16.0),
+                      border: InputBorder.none,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          dispatch(LoginActionCreator.onHidePasswordField(
+                            !state.hidePasswordField,
+                          ));
+                        },
+                        icon: Icon(
+                          state.hidePasswordField
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           buildErrorMsg(state, viewService),
-          buildLoginButton(state, dispatch, viewService, progressDialog),
+          buildLoginButton(state, dispatch, viewService),
           Container(
             width: MediaQuery.of(viewService.context).size.width,
             margin: EdgeInsets.only(
@@ -191,7 +195,8 @@ Widget buildView(
             ),
           ),
           Container(
-            child: Divider(),
+            margin: EdgeInsets.only(top: 20.0),
+            child: Divider(color: Colors.blueGrey),
           ),
           Container(
             width: MediaQuery.of(viewService.context).size.width,
@@ -199,7 +204,7 @@ Widget buildView(
               left: 40.0,
               right: 40.0,
               top: 10.0,
-              bottom: 20.0,
+              bottom: 10.0,
             ),
             alignment: Alignment.center,
             child: Row(
@@ -231,7 +236,6 @@ Widget buildLoginButton(
   LoginState state,
   Dispatch dispatch,
   ViewService viewService,
-  ProgressDialog progressDialog,
 ) {
   return Container(
     width: MediaQuery.of(viewService.context).size.width,
@@ -254,7 +258,7 @@ Widget buildLoginButton(
             ),
             color: Color(0xfff65aa3),
             onPressed: () {
-              dispatch(LoginActionCreator.onLogin(progressDialog));
+              dispatch(LoginActionCreator.onLogin());
             },
             child: Text(
               "Log In",

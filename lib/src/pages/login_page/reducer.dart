@@ -8,6 +8,7 @@ Reducer<LoginState> buildReducer() {
     <Object, Reducer<LoginState>>{
       LoginAction.onLoginFailure: _onLoginFailure,
       LoginAction.onLoginSuccess: _onLoginSuccess,
+      LoginAction.onHidePasswordField: onHidePasswordField,
     },
   );
 }
@@ -22,5 +23,11 @@ LoginState _onLoginFailure(LoginState state, Action action) {
 LoginState _onLoginSuccess(LoginState state, Action action) {
   LoginState newState = state.clone();
   newState.loginResult = LoginResult.LoginSuccess;
+  return newState;
+}
+
+LoginState onHidePasswordField(LoginState state, Action action) {
+  LoginState newState = state.clone();
+  newState.hidePasswordField = action.payload;
   return newState;
 }
