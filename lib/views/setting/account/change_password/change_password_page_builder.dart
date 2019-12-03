@@ -8,7 +8,7 @@ class ChangePasswordPageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ChangePasswordBloc>(
-      builder: (context) {
+      create: (context) {
         return ChangePasswordBloc(
           userRepository: RepositoryProvider.of<UserRepository>(context),
         );

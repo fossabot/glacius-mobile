@@ -14,7 +14,7 @@ class LayoutPageBuilder extends StatelessWidget {
         }
       },
       child: BlocProvider<LayoutBloc>(
-        builder: (context) => LayoutBloc(),
+        create: (context) => LayoutBloc(),
         child: LayoutPage(),
       ),
     );

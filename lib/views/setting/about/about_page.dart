@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:glacius_mobile/config/config.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -52,8 +52,6 @@ class AboutPage extends StatelessWidget {
 
   void _launchGithub() async {
     const url = 'https://github.com/glaciusmss/glacius-mobile';
-    if (await canLaunch(url)) {
-      await launch(url);
-    }
+    await InAppBrowser.openWithSystemBrowser(url: url);
   }
 }

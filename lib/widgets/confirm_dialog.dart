@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmDialog extends StatelessWidget {
-  final String title;
+  final Widget title;
   final Widget content;
   final Function onCancelPressed;
   final Function onConfirmPressed;
@@ -11,7 +11,7 @@ class ConfirmDialog extends StatelessWidget {
   final String confirmBtnText;
 
   ConfirmDialog({
-    this.title = 'Confirmation',
+    this.title = const Text('Confirmation'),
     @required this.content,
     this.onCancelPressed,
     @required this.onConfirmPressed,
@@ -27,7 +27,7 @@ class ConfirmDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      title: Text(title),
+      title: title,
       content: content,
       actions: <Widget>[
         FlatButton(
@@ -36,9 +36,14 @@ class ConfirmDialog extends StatelessWidget {
               : Theme.of(context).accentColor,
           child: Text(cancelBtnText),
           onPressed: () {
-            Navigator.of(context).pop();
+            bool shouldClose = true;
+
             if (onCancelPressed != null) {
-              onCancelPressed();
+              shouldClose = onCancelPressed();
+            }
+
+            if (shouldClose == true || shouldClose == null) {
+              Navigator.of(context).pop();
             }
           },
         ),
@@ -48,9 +53,14 @@ class ConfirmDialog extends StatelessWidget {
               : Theme.of(context).primaryColor,
           child: Text(confirmBtnText),
           onPressed: () {
-            Navigator.of(context).pop();
+            bool shouldClose = true;
+
             if (onConfirmPressed != null) {
-              onConfirmPressed();
+              shouldClose = onConfirmPressed();
+            }
+
+            if (shouldClose == true || shouldClose == null) {
+              Navigator.of(context).pop();
             }
           },
         )

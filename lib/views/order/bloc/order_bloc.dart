@@ -18,8 +18,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   Stream<OrderState> mapEventToState(OrderEvent event) async* {
     if (event is LoadOrders) {
       yield OrdersLoading();
-      List<Order> orders =
-          await orderRepository.getOrders(shopId: shopBloc.getMyShop().id);
+      List<Order> orders = await orderRepository.getOrders(
+        shopId: shopBloc.getMyShop().id,
+      );
       yield OrdersLoaded(orders: orders);
     }
   }

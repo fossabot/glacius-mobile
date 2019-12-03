@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:glacius_mobile/app_init.dart';
 import 'package:glacius_mobile/views/layout/layout.dart';
 import 'package:glacius_mobile/views/setting/about/about.dart';
-import 'package:glacius_mobile/views/setting/change_password/change_password_page_builder.dart';
+import 'package:glacius_mobile/views/setting/account/change_password/change_password_page_builder.dart';
+import 'package:glacius_mobile/views/setting/connections/marketplace_integration_setting/marketplace_integration_setting.dart';
 import 'package:glacius_mobile/views/setting/setting.dart';
 
 class Routes {
@@ -20,12 +21,12 @@ class Routes {
 
         return SlideTransition(
           transformHitTests: false,
-          position: new Tween<Offset>(
+          position: Tween<Offset>(
             begin: const Offset(1.0, 0.0),
             end: Offset.zero,
           ).animate(animation),
-          child: new SlideTransition(
-            position: new Tween<Offset>(
+          child: SlideTransition(
+            position: Tween<Offset>(
               begin: Offset.zero,
               end: const Offset(-1.0, 0.0),
             ).animate(secondaryAnimation),
@@ -46,6 +47,8 @@ class Routes {
       '/settings': (context) => SettingPage(args: args),
       '/settings/account/change_password': (context) =>
           ChangePasswordPageBuilder(),
+      '/settings/connections/marketplaces': (context) =>
+          MarketplaceIntegrationSettingPageBuilder(),
       '/settings/about': (context) => AboutPage(),
     };
   }

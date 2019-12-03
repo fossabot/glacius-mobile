@@ -15,6 +15,7 @@ class Request {
       BaseOptions(
         baseUrl: DotEnv().env['APP_URL'],
         connectTimeout: 5 * 1000,
+        headers: {'X-REQUEST-FROM': 'mobile'},
       ),
     );
 

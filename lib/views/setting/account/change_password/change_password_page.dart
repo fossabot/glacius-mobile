@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:glacius_mobile/utils/utils.dart';
-import 'package:glacius_mobile/views/setting/change_password/widgets/widgets.dart';
+import 'package:glacius_mobile/views/setting/account/change_password/widgets/widgets.dart';
 import 'package:glacius_mobile/widgets/widgets.dart';
 
 import 'bloc/bloc.dart';
@@ -39,32 +39,27 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             show: (state is ChangePasswordSubmitting),
             child: Container(
               margin: EdgeInsets.all(10.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  child: FormBuilder(
-                    key: _fbKey,
-                    autovalidate: true,
-                    child: Column(
-                      children: <Widget>[
-                        _oldPasswordField(),
-                        SizedBox(height: 15.0),
-                        _newPasswordField(),
-                        SizedBox(height: 15.0),
-                        _confirmNewPasswordField(),
-                        SizedBox(height: 15.0),
-                        if (state is ChangePasswordFailure)
-                          ErrorPanel(
-                            errorTxt: state.error.toString(),
-                            onDismissed: () {
-                              BlocProvider.of<ChangePasswordBloc>(context)
-                                  .add(ResetChangePasswordBloc());
-                            },
-                          ),
-                      ],
-                    ),
-                  ),
+              padding: EdgeInsets.all(20.0),
+              child: FormBuilder(
+                key: _fbKey,
+                autovalidate: true,
+                child: Column(
+                  children: <Widget>[
+                    _oldPasswordField(),
+                    SizedBox(height: 15.0),
+                    _newPasswordField(),
+                    SizedBox(height: 15.0),
+                    _confirmNewPasswordField(),
+                    SizedBox(height: 15.0),
+                    if (state is ChangePasswordFailure)
+                      ErrorPanel(
+                        errorTxt: state.error.toString(),
+                        onDismissed: () {
+                          BlocProvider.of<ChangePasswordBloc>(context)
+                              .add(ResetChangePasswordBloc());
+                        },
+                      ),
+                  ],
                 ),
               ),
             ),

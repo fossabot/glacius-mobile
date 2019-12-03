@@ -112,11 +112,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.exit_to_app,
                       color: Theme.of(context).errorColor,
                     ),
-                    title: RichText(
-                      text: TextSpan(
-                        text: 'Logout',
-                        style: TextStyle(color: Theme.of(context).errorColor),
-                      ),
+                    title: Text(
+                      'Logout',
+                      style: TextStyle(color: Theme.of(context).errorColor),
                     ),
                     onTap: _onLogoutPressed,
                   ),
@@ -134,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
         context: context,
         builder: (context) {
           return ConfirmDialog(
-            title: 'Logout',
+            title: Text('Logout'),
             content: Text(
               'You will be returned to the login screen.',
             ),

@@ -10,7 +10,7 @@ class SetupShopPageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SetupShopBloc>(
-      builder: (context) {
+      create: (context) {
         return SetupShopBloc(
           shopRepository: RepositoryProvider.of<ShopRepository>(context),
         );

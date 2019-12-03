@@ -20,9 +20,7 @@ class _AppInitState extends State<AppInit> {
       listener: (context, state) {
         if (state is MyShopLoaded && state.myShop.isNotEmpty) {
           // main page
-          SystemChrome.setEnabledSystemUIOverlays(
-            SystemUiOverlay.values,
-          );
+          SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
           Navigator.pushReplacementNamed(context, '/main');
         }
       },

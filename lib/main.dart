@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:glacius_mobile/bloc/auth/auth.dart';
 import 'package:glacius_mobile/bloc/bloc.dart';
+import 'package:glacius_mobile/bloc/universal_link/universal_link.dart';
 import 'package:glacius_mobile/config/config.dart';
 import 'package:glacius_mobile/repositories/repositories.dart';
 import 'package:glacius_mobile/utils/utils.dart';
@@ -19,16 +20,30 @@ Future main() async {
     MultiRepositoryProvider(
         providers: [
           RepositoryProvider<UserRepository>(
-            builder: (context) => UserRepository(),
+            create: (context) => UserRepository(),
           ),
           RepositoryProvider<ShopRepository>(
-            builder: (context) => ShopRepository(),
+            create: (context) => ShopRepository(),
+          ),
+          RepositoryProvider<OrderRepository>(
+            create: (context) => OrderRepository(),
+          ),
+          RepositoryProvider<MarketplaceRepository>(
+            create: (context) => MarketplaceRepository(),
+          ),
+          RepositoryProvider<OAuthRepository>(
+            create: (context) => OAuthRepository(),
           ),
         ],
         child: MultiBlocProvider(
           providers: <BlocProvider>[
+            BlocProvider<UniversalLinkBloc>(
+              create: (context) {
+                return UniversalLinkBloc();
+              },
+            ),
             BlocProvider<ShopBloc>(
-              builder: (context) {
+              create: (context) {
                 return ShopBloc(
                   shopRepository: RepositoryProvider.of<ShopRepository>(
                     context,
@@ -37,7 +52,7 @@ Future main() async {
               },
             ),
             BlocProvider<AuthBloc>(
-              builder: (context) {
+              create: (context) {
                 return AuthBloc(
                   shopBloc: BlocProvider.of<ShopBloc>(context),
                   userRepository: RepositoryProvider.of<UserRepository>(

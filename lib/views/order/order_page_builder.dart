@@ -8,17 +8,14 @@ import 'bloc/bloc.dart';
 class OrderPageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      builder: (context) => OrderRepository(),
-      child: BlocProvider<OrderBloc>(
-        builder: (context) {
-          return OrderBloc(
-            orderRepository: RepositoryProvider.of<OrderRepository>(context),
-            shopBloc: BlocProvider.of<ShopBloc>(context),
-          );
-        },
-        child: OrderPage(),
-      ),
+    return BlocProvider<OrderBloc>(
+      create: (context) {
+        return OrderBloc(
+          orderRepository: RepositoryProvider.of<OrderRepository>(context),
+          shopBloc: BlocProvider.of<ShopBloc>(context),
+        );
+      },
+      child: OrderPage(),
     );
   }
 }

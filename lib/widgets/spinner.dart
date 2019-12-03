@@ -8,11 +8,15 @@ class Spinner {
     );
   }
 
-  static Widget configured(context) {
+  static Widget configured(
+    context, {
+    double size = 35.0,
+    double lineWidth = 4.0,
+  }) {
     return SpinKitRing(
       color: Theme.of(context).indicatorColor,
-      lineWidth: 4.0,
-      size: 35.0,
+      lineWidth: lineWidth,
+      size: size,
     );
   }
 }

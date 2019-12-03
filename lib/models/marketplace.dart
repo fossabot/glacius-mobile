@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:glacius_mobile/mixin/mixin.dart';
 import 'package:glacius_mobile/models/base_model.dart';
 
-class Marketplace extends BaseModel {
+class Marketplace extends BaseModel with Statusable {
   final String name;
   final String website;
 

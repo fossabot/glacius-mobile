@@ -5,6 +5,7 @@ import 'package:glacius_mobile/bloc/bloc.dart';
 import 'package:glacius_mobile/models/models.dart';
 import 'package:glacius_mobile/repositories/repositories.dart';
 import 'package:glacius_mobile/utils/utils.dart';
+import 'package:pedantic/pedantic.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   UserRepository userRepository;
@@ -38,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (event is LoggedOut) {
       yield AuthLoading();
-      this.userRepository.logout(); //fire and forget, not really important
+      unawaited(this.userRepository.logout()); //fire and forget, not really important
       Request().removeTokenFromAuthHeader();
       await this.userRepository.deleteToken();
       this.shopBloc.add(ResetShopBloc());
