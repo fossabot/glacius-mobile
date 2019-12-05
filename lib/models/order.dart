@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:glacius_mobile/models/base_model.dart';
 import 'package:glacius_mobile/models/marketplace.dart';
 
@@ -39,7 +37,4 @@ class Order extends BaseModel {
       'subtotal_price': subtotalPrice,
       'marketplace': marketplace,
     });
-
-  @override
-  String toString() => '$runtimeType ' + jsonEncode(this.toJson());
 }

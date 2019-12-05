@@ -1,13 +1,13 @@
 import 'package:glacius_mobile/models/base_model.dart';
 
-class Shop extends BaseModel {
+class NotificationChannel extends BaseModel {
   final String name;
-  final String description;
+  final String website;
 
-  Shop({
+  NotificationChannel({
     int id,
     this.name,
-    this.description,
+    this.website,
     DateTime createdAt,
     DateTime updatedAt,
   }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
@@ -16,17 +16,17 @@ class Shop extends BaseModel {
   List<Object> get props => super.props
     ..addAll([
       name,
-      description,
+      website,
     ]);
 
-  Shop.fromJson(Map<String, dynamic> json)
+  NotificationChannel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
-        description = json['description'],
+        website = json['website'],
         super.fromJson(json);
 
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll({
       'name': name,
-      'description': description,
+      'website': website,
     });
 }

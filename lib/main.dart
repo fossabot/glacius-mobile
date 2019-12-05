@@ -34,6 +34,9 @@ Future main() async {
           RepositoryProvider<OAuthRepository>(
             create: (context) => OAuthRepository(),
           ),
+          RepositoryProvider<NotificationRepository>(
+            create: (context) => NotificationRepository(),
+          )
         ],
         child: MultiBlocProvider(
           providers: <BlocProvider>[

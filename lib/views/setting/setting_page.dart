@@ -40,13 +40,7 @@ class _SettingPageState extends State<SettingPage> {
             );
           },
           separatorBuilder: (context, index) {
-            return Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: Divider.createBorderSide(context),
-                ),
-              ),
-            );
+            return Divider(height: 0.0);
           },
         ),
       ),

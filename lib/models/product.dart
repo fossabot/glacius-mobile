@@ -1,13 +1,18 @@
 import 'package:glacius_mobile/models/base_model.dart';
+import 'package:glacius_mobile/models/models.dart';
 
-class Shop extends BaseModel {
+class Product extends BaseModel {
   final String name;
   final String description;
+  final List<String> images;
+  final List<ProductVariant> productVariants;
 
-  Shop({
+  Product({
     int id,
     this.name,
     this.description,
+    this.images,
+    this.productVariants,
     DateTime createdAt,
     DateTime updatedAt,
   }) : super(id: id, createdAt: createdAt, updatedAt: updatedAt);
@@ -17,16 +22,24 @@ class Shop extends BaseModel {
     ..addAll([
       name,
       description,
+      images,
+      productVariants,
     ]);
 
-  Shop.fromJson(Map<String, dynamic> json)
+  Product.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         description = json['description'],
+        images = json['images'],
+        productVariants = (json['product_variants'] as List)
+            .map((model) => ProductVariant.fromJson(model))
+            .toList(),
         super.fromJson(json);
 
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll({
       'name': name,
       'description': description,
+      'images': images,
+      'product_variants': productVariants,
     });
 }

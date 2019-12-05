@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:glacius_mobile/models/base_model.dart';
 import 'package:glacius_mobile/models/marketplace.dart';
 
@@ -26,7 +25,4 @@ class Customer extends BaseModel {
     ..addAll({
       'marketplace': marketplace,
     });
-
-  @override
-  String toString() => '$runtimeType ' + jsonEncode(this.toJson());
 }

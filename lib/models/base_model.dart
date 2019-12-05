@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:glacius_mobile/utils/date_helper.dart';
 
@@ -26,4 +28,7 @@ abstract class BaseModel extends Equatable {
 
   @override
   List<Object> get props => [id, createdAt, updatedAt];
+
+  @override
+  String toString() => '$runtimeType ' + jsonEncode(this.toJson());
 }

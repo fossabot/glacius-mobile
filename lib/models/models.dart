@@ -4,3 +4,7 @@ export 'order.dart';
 export 'marketplace.dart';
 export 'shop.dart';
 export 'general_error.dart';
+export 'notification_channel.dart';
+export 'product_variant.dart';
+export 'product.dart';
+export 'image.dart';

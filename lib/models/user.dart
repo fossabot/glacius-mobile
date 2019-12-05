@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:glacius_mobile/models/base_model.dart';
 
 class User extends BaseModel {
@@ -35,7 +34,4 @@ class User extends BaseModel {
       'email': email,
       'email_verified_at': emailVerifiedAt,
     });
-
-  @override
-  String toString() => '$runtimeType ' + jsonEncode(this.toJson());
 }

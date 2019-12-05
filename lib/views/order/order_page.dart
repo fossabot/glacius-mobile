@@ -20,12 +20,24 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: BlocBuilder<OrderBloc, OrderState>(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Order'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: BlocBuilder<OrderBloc, OrderState>(
         builder: (context, state) {
           if (state is OrdersLoaded) {
-            return ListView.builder(
+            return ListView.separated(
               itemCount: state.orders.length,
+              separatorBuilder: (context, index) {
+                return Divider(height: 0.0);
+              },
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: Padding(
@@ -34,6 +46,8 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   title: Text(state.orders[index].totalPrice.toString()),
                   subtitle: Text(state.orders[index].createdAt.toString()),
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  onTap: () {},
                 );
               },
             );

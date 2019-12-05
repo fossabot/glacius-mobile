@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -90,8 +91,23 @@ class _EnableDisableButtonState extends State<EnableDisableButton> {
 
     if (_isMarketplaceEnabled()) {
       //this is disable action
-      oAuthBloc.add(
-        DisconnectOAuth(marketplace: widget.marketplace),
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ConfirmDialog(
+            content: Text(
+              'You will be disconnect from ' +
+                  StringUtils.capitalize(widget.marketplace),
+            ),
+            confirmBtnColor: Theme.of(context).errorColor,
+            confirmBtnText: 'Disable',
+            onConfirmPressed: () {
+              oAuthBloc.add(
+                DisconnectOAuth(marketplace: widget.marketplace),
+              );
+            },
+          );
+        },
       );
     } else {
       //show dialog first if there's required field

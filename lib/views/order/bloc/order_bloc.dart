@@ -21,7 +21,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       List<Order> orders = await orderRepository.getOrders(
         shopId: shopBloc.getMyShop().id,
       );
-      yield OrdersLoaded(orders: orders);
+      yield OrdersLoaded(orders: orders.reversed.toList());
     }
   }
 }

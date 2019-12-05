@@ -4,6 +4,7 @@ import 'package:glacius_mobile/views/layout/layout.dart';
 import 'package:glacius_mobile/views/setting/about/about.dart';
 import 'package:glacius_mobile/views/setting/account/change_password/change_password_page_builder.dart';
 import 'package:glacius_mobile/views/setting/connections/marketplace_integration_setting/marketplace_integration_setting.dart';
+import 'package:glacius_mobile/views/setting/connections/notification_integration_setting/notification_integration_setting.dart';
 import 'package:glacius_mobile/views/setting/setting.dart';
 
 class Routes {
@@ -49,6 +50,8 @@ class Routes {
           ChangePasswordPageBuilder(),
       '/settings/connections/marketplaces': (context) =>
           MarketplaceIntegrationSettingPageBuilder(),
+      '/settings/connections/notifications': (context) =>
+          NotificationIntegrationSettingPageBuilder(),
       '/settings/about': (context) => AboutPage(),
     };
   }
